@@ -350,4 +350,22 @@ Predicted class: 0
 
 Bayes'theorem demonstrates its wide-ranging and adaptable applicability in various problem domains and data types.
 
+
+\section*{Discussion and Conclusion}
+
+The results of the experiments demonstrate that the Naive Bayes classifier, despite its simplicity, 
+can make predictions that are intuitively logical. For example, in the tennis scenario, 
+the model predicted that the person would not play tennis when the weather conditions were "Sunny, Cool, High humidity, and Strong wind". 
+This aligns with common sense: if the weather is too extreme (e.g., strong wind or high humidity),
+ it is less likely someone would want to play tennis.
+
+However, while the model gives reasonable results, it also has clear limitations. 
+The most important one lies in its core assumption: Naive Bayes treats all features as \textbf{conditionally independent given the class}. 
+In reality, weather features such as temperature and humidity, or wind and outlook, are often correlated. 
+This assumption prevents the model from capturing interactions between features — 
+Ignoring such dependencies may oversimplify the model and reduce accuracy in more complex datasets.
+
+Despite these limitations, Naive Bayes remains a valuable tool, especially for classification tasks where speed and simplicity are prioritized. 
+Its interpretability makes it ideal for introductory use in artificial intelligence and for baseline comparisons in real-world applications.
+
 \end{document}
