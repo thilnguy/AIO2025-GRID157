@@ -8,6 +8,7 @@
 \usepackage{xcolor}
 \usepackage{caption}
 \usepackage{enumitem}
+\usepackage{graphicx}
 \geometry{a4paper, margin=1in}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -42,9 +43,111 @@
 \begin{document}
 
 \maketitle
-In this section, we'll examine several examples of probability applied to different types of data.
+Probability helps us understand uncertainty and make predictions.
+In this document, we'll learn basic probability concepts and see how they are used in artificial intelligence.
 
-\section*{3.1 Naive Bayes Classifier for Discrete Random Variables}
+\section*{1. Introduction}
+
+\subsection*{Experiment and Event}
+
+An \textbf{experiment} is any procedure that can be repeated multiple times under the same conditions and has a well-defined set of possible outcomes.
+The set of all possible outcomes is called the \textbf{sample space}, usually denoted by $\Omega$ or $S$.
+
+An \textbf{event} is a subset of the sample space - it's a collection of possible outcomes that we're interested in. Events are typically denoted by capital letters like $A$, $B$, etc.
+
+\textbf{Example:}
+Consider the experiment of rolling a six-sided dice. In this case:
+
+\begin{itemize}
+    \item The \textbf{experiment} is the act of rolling the dice
+    \item The \textbf{sample space} $\Omega = \{1, 2, 3, 4, 5, 6\}$ contains all possible outcomes
+    \item Some examples of \textbf{events} could be:
+    \begin{itemize}
+        \item Event $A$: Rolling an odd number = $\{1, 3, 5\}$
+        \item Event $B$: Rolling a even number = $\{2, 4, 6\}$
+        \item Event $C$: Rolling a prime number = $\{2, 3, 5\}$
+    \end{itemize}
+\end{itemize}
+
+Each time we perform this experiment, exactly one outcome from the sample space will occur. An event is said to occur if the actual outcome is one of the outcomes in that event's set.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/image1.png}
+    \caption{Example of Experiment and Event}
+    \label{fig:experiment-event}
+\end{figure}
+
+\subsection*{Operations on Event}
+
+\subsubsection*{Union of Events:}
+The union of two events $A$ and $B$, denoted $A \cup B$, is the event that occurs if either $A$ or $B$ or both occur.
+
+\textbf{Example:}
+
+\begin{align*}
+    A &= \{1, 3, 5\} \\
+    B &= \{2, 4, 6\} \\
+    A \cup B &= \{1, 2, 3, 4, 5, 6\}
+\end{align*}
+
+
+\subsubsection*{Intersection of Events:}
+The intersection of two events $A$ and $B$, denoted $A \cap B$, is the event that occurs if both $A$ and $B$ occur.
+
+\textbf{Example:}
+\begin{align*}
+    A &= \{1, 3, 5\} \\
+    B &= \{2, 4, 6\} \\
+    A \cap B &= \{2, 4, 6\}
+\end{align*}
+
+\subsubsection*{Complementary Event:}
+The complementary event of an event $A$, denoted $A^c$, is the event that occurs if $A$ does not occur.
+
+\textbf{Example:}
+\begin{align*}
+    A &= \{1, 3, 5\} \\
+    A^c &= \{2, 4, 6\}
+\end{align*}
+
+
+\subsubsection*{Mutually Exclusive Events:}
+Two events $A$ and $B$ are mutually exclusive if they cannot occur at the same time, i.e., $A \cap B = \emptyset$.
+
+\textbf{Example:}
+\begin{align*}
+    A &= \{1, 3, 5\} \\
+    B &= \{2, 4, 6\} \\
+    A \cap B &= \emptyset
+\end{align*}
+
+\subsection*{Disjoint Events}
+Two events $A$ and $B$ are disjoint if they cannot occur at the same time, i.e., $A \cap B = \emptyset$.
+
+\textbf{Example:}
+\begin{align*}
+    A &= \{\text{getting heads}\} \\
+    B &= \{\text{getting tails}\} \\
+    A \cap B &= \emptyset
+\end{align*}
+
+
+\section*{2. Probability \& Bayes' Rule}
+
+\subsection*{Classical Geometric definition}
+
+\subsection*{Empirical probability (experimental probability)}
+
+\subsection*{Rule of probability}
+
+\subsection*{Total probability}
+
+\subsection*{Bayes' Rule}
+
+\section*{3. Naive Bayes Classifier}
+
+\subsection*{3.1 Naive Bayes Classifier for Discrete Random Variables}
 \subsection*{Problem Example: Predicting Whether to Play Tennis}
 
 We are given a small dataset to predict whether a person will play tennis based on four \textbf{discrete features} (a "naive" hypothesis, yet effective): \textit{Outlook}, \textit{Temperature}, \textit{Humidity} and \textit{Wind}.
@@ -83,7 +186,7 @@ P(X \mid \text{Yes}) \cdot P(\text{Yes}) \quad \text{and} \quad P(X \mid \text{N
 $$
 
 \subsection*{Step 1: Compute Prior Probabilites}
-From the dataset: 
+From the dataset:
 
 $$
 P(\text{Yes}) = \frac{3}{5} = 0.6
@@ -245,7 +348,7 @@ We want to classify a new sample with BMI=24.
 General formulas:
 $$
 \mu _0 = \frac{1}{n_0} \sum_{i=1}^{n_0} x_i
-\quad  and \quad 
+\quad  and \quad
 \sigma_0^2 = \frac{1}{n_0} \sum_{i=1}^{n_0} (x_i - \mu  _0)^2
 $$
 
@@ -344,7 +447,7 @@ print("Predicted class:", predicted_class[0])
 \end{lstlisting}
 
 \begin{lstlisting}
-Predicted class: 0 
+Predicted class: 0
 \end{lstlisting}
 
 
@@ -353,19 +456,19 @@ Bayes'theorem demonstrates its wide-ranging and adaptable applicability in vario
 
 \section*{Discussion and Conclusion}
 
-The results of the experiments demonstrate that the Naive Bayes classifier, despite its simplicity, 
-can make predictions that are intuitively logical. For example, in the tennis scenario, 
-the model predicted that the person would not play tennis when the weather conditions were "Sunny, Cool, High humidity, and Strong wind". 
+The results of the experiments demonstrate that the Naive Bayes classifier, despite its simplicity,
+can make predictions that are intuitively logical. For example, in the tennis scenario,
+the model predicted that the person would not play tennis when the weather conditions were "Sunny, Cool, High humidity, and Strong wind".
 This aligns with common sense: if the weather is too extreme (e.g., strong wind or high humidity),
  it is less likely someone would want to play tennis.
 
-However, while the model gives reasonable results, it also has clear limitations. 
-The most important one lies in its core assumption: Naive Bayes treats all features as \textbf{conditionally independent given the class}. 
-In reality, weather features such as temperature and humidity, or wind and outlook, are often correlated. 
-This assumption prevents the model from capturing interactions between features — 
+However, while the model gives reasonable results, it also has clear limitations.
+The most important one lies in its core assumption: Naive Bayes treats all features as \textbf{conditionally independent given the class}.
+In reality, weather features such as temperature and humidity, or wind and outlook, are often correlated.
+This assumption prevents the model from capturing interactions between features —
 Ignoring such dependencies may oversimplify the model and reduce accuracy in more complex datasets.
 
-Despite these limitations, Naive Bayes remains a valuable tool, especially for classification tasks where speed and simplicity are prioritized. 
+Despite these limitations, Naive Bayes remains a valuable tool, especially for classification tasks where speed and simplicity are prioritized.
 Its interpretability makes it ideal for introductory use in artificial intelligence and for baseline comparisons in real-world applications.
 
 \end{document}
