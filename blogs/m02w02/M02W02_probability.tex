@@ -38,7 +38,7 @@
 \lstset{style=mystyle}
 
 \title{Basic Probability and Its Applications in AI}
-\author{Bui Van Tai}
+\author{Tai Bui Van, Cuong Tran Xuan, An Bui Hoang, Khanh Nguyen Nam, Anh Nguyen Thi Lan}
 \date{}
 \begin{document}
 
@@ -78,7 +78,7 @@ Each time we perform this experiment, exactly one outcome from the sample space 
     \label{fig:experiment-event}
 \end{figure}
 
-\subsection*{Operations on Event}
+\subsection*{Operations on Event \& Relations of Event}
 
 \subsubsection*{Union of Events:}
 The union of two events $A$ and $B$, denoted $A \cup B$, is the event that occurs if either $A$ or $B$ or both occur.
@@ -135,15 +135,122 @@ Two events $A$ and $B$ are disjoint if they cannot occur at the same time, i.e.,
 
 \section*{2. Probability \& Bayes' Rule}
 
-\subsection*{Classical Geometric definition}
+\subsection*{Classical Definition of Probability}
+
+The probability of an event $A$ is defined as the ratio of the number of favorable outcomes to the total number of possible outcomes.
+
+\begin{align*}
+    P(A) &= \frac{\text{number of favorable outcomes}}{\text{total number of possible outcomes}}
+\end{align*}
+
+
+For example, when rolling a fair six-sided die:
+
+\begin{itemize}
+    \item The probability of getting an even number is:
+    $$P(\text{even}) = \frac{|\{2,4,6\}|}{|\{1,2,3,4,5,6\}|} = \frac{3}{6} = \frac{1}{2}$$
+
+    \item The probability of getting a number greater than 4 is:
+    $$P(>4) = \frac{|\{5,6\}|}{|\{1,2,3,4,5,6\}|} = \frac{2}{6} = \frac{1}{3}$$
+\end{itemize}
+
+This definition assumes that all outcomes are equally likely (uniform probability distribution). In many real-world scenarios, this assumption may not hold true, leading us to consider empirical or subjective probabilities.
 
 \subsection*{Empirical probability (experimental probability)}
 
-\subsection*{Rule of probability}
+\subsection*{Rules of Probability}
 
-\subsection*{Total probability}
+\subsubsection*{Addition Rule:}
+The probability of the union of two events $A$ and $B$ is given by:
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+\subsubsection*{Multiplication Rule:}
+The probability of the intersection of two events $A$ and $B$ is given by:
+
+$$
+P(A \cap B) = P(A) \cdot P(B \mid A)
+$$
+
+\subsubsection*{Conditional Probability:}
+The probability of an event $A$ given that event $B$ has occurred is given by:
+
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+
+\subsection*{Total Probability}
+
+The law of total probability states that for any event $A$ and a partition of the sample space $\{B_1, B_2, ..., B_n\}$:
+
+$$
+P(A) = \sum_{i=1}^n P(A|B_i)P(B_i)
+$$
+
+This is particularly useful when it's easier to compute conditional probabilities $P(A|B_i)$ than to compute $P(A)$ directly.
+
+\subsubsection*{Example}
+Consider a company that produces electronic components. The components are manufactured in three different factories:
+\begin{itemize}
+    \item Factory 1 produces 50\% of the components with a 3\% defect rate
+    \item Factory 2 produces 30\% of the components with a 2\% defect rate
+    \item Factory 3 produces 20\% of the components with a 4\% defect rate
+\end{itemize}
+
+The probability of getting a defective component can be calculated using the law of total probability:
+
+\begin{align*}
+P(\text{defective}) &= P(\text{defective}|F_1)P(F_1) + P(\text{defective}|F_2)P(F_2) + P(\text{defective}|F_3)P(F_3) \\
+&= (0.03)(0.5) + (0.02)(0.3) + (0.04)(0.2) \\
+&= 0.015 + 0.006 + 0.008 \\
+&= 0.029 \text{ or } 2.9\%
+\end{align*}
 
 \subsection*{Bayes' Rule}
+Bayes' rule is a fundamental theorem in probability theory that allows us to update our beliefs based on new evidence.
+
+Bayes' rule states that:
+
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
+
+where:
+\begin{itemize}
+    \item $P(A|B)$ is the posterior probability of $A$ given $B$
+    \item $P(B|A)$ is the likelihood of $B$ given $A$
+    \item $P(A)$ is the prior probability of $A$
+    \item $P(B)$ is the probability of $B$
+\end{itemize}
+
+\subsubsection*{Example}
+A medical test for a disease has the following characteristics:
+\begin{itemize}
+    \item The disease occurs in 1\% of the population: $P(D) = 0.01$
+    \item The test is 95\% accurate for people with the disease: $P(+|D) = 0.95$
+    \item The false positive rate is 10\%: $P(+|\neg D) = 0.10$
+\end{itemize}
+
+If someone tests positive, what is the probability they have the disease?
+
+Using Bayes' rule:
+\begin{align*}
+P(D|+) &= \frac{P(+|D)P(D)}{P(+)} \\
+&= \frac{P(+|D)P(D)}{P(+|D)P(D) + P(+|\neg D)P(\neg D)} \\
+&= \frac{(0.95)(0.01)}{(0.95)(0.01) + (0.10)(0.99)} \\
+&= \frac{0.0095}{0.0095 + 0.099} \\
+&\approx 0.088 \text{ or } 8.8\%
+\end{align*}
+
+Despite testing positive, there is only an 8.8\% chance of having the disease. This counterintuitive result demonstrates why Bayes' rule is so important in updating probabilities based on new evidence.
+
+
+
+
+
 
 \section*{3. Naive Bayes Classifier}
 
@@ -460,12 +567,12 @@ The results of the experiments demonstrate that the Naive Bayes classifier, desp
 can make predictions that are intuitively logical. For example, in the tennis scenario,
 the model predicted that the person would not play tennis when the weather conditions were "Sunny, Cool, High humidity, and Strong wind".
 This aligns with common sense: if the weather is too extreme (e.g., strong wind or high humidity),
- it is less likely someone would want to play tennis.
+it is less likely someone would want to play tennis.
 
 However, while the model gives reasonable results, it also has clear limitations.
 The most important one lies in its core assumption: Naive Bayes treats all features as \textbf{conditionally independent given the class}.
 In reality, weather features such as temperature and humidity, or wind and outlook, are often correlated.
-This assumption prevents the model from capturing interactions between features —
+This assumption prevents the model from capturing interactions between features.
 Ignoring such dependencies may oversimplify the model and reduce accuracy in more complex datasets.
 
 Despite these limitations, Naive Bayes remains a valuable tool, especially for classification tasks where speed and simplicity are prioritized.
