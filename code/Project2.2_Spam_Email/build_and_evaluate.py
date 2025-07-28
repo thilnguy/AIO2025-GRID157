@@ -13,9 +13,18 @@ if __name__ == "__main__":
     vector_store.save()
     
     # Initialize the evaluator
-    evaluator = ModelEvaluator(vector_store, k=Config.DEFAULT_K)
+    evaluator = ModelEvaluator(vector_store)
     
     # Evaluate the model
-    metrics = evaluator.evaluate()
+    evaluator.evaluate_embedding_only()
+    evaluator.evaluate_bm25_only()
+    evaluator.evaluate_hybrid()
+
+    # Save evaluation results
+    evaluator.save_results()
+    evaluator.print_summary()
     
-    print(f"Evaluation Metrics: {metrics}")
+    # Save mispredictions
+    #y_preds = evaluator.hybrid_knn.predict(evaluator.test_df['Message'].tolist())
+
+   # evaluator._save_mispredictions()

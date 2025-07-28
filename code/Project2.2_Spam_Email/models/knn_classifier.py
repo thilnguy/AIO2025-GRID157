@@ -1,13 +1,25 @@
 import numpy as np
+import faiss
 from utils.preprocess import preprocess_text
 from config import Config
+from models.bm25_retriever import BM25Retriever
+from models.vector_store import VectorStore
+from utils.logger import setup_logger
+from collections import Counter
 
-class KNNClassifier:
-    def __init__(self, vector_store, k=None):
+logger = setup_logger("classifier")
+
+class HybridKNNClassifier:
+    def __init__(self, vector_store):
         self.vector_store = vector_store
-        self.k = k if k is not None else Config.DEFAULT_K
+        self.messages = vector_store.train_metadata["Message"].tolist()
+        self.labels = vector_store.train_metadata["Category"].tolist()
+        
+        # Build BM25 retriever for training metadata
+        self.bm25 = BM25Retriever(self.messages, self.labels)
+        
 
-    def predict(self, query_text:str) -> dict:
+    def predict(self, query_text:str, k=None) -> dict:
         """
         Predict the label for a given query using KNN.
         
@@ -20,27 +32,45 @@ class KNNClassifier:
                 neighbors: List of nearest neighbors' labels
             }
         """
-        query = preprocess_text(query_text)
-        emb = self.vector_store.embedder.encode(query, is_query=True).astype("float32")
-        similarites, indices = self.vector_store.index.search(emb, self.k)
-        
-        labels = self.vector_store.train_metadata.iloc[indices[0]]['Category'].tolist()
-        scores = similarites[0].tolist()
+        k = k if k is not None else Config.DEFAULT_K
 
-        predicted_label, counts = np.unique(labels, return_counts=True)
-        final_label = predicted_label[np.argmax(counts)]
+        # Retrieve bm25-top-k documents using BM25
+        bm25_indices = self.bm25.retrieve(query_text)
+        logger.info(f"BM25 retrieved {len(bm25_indices)} candidates.")
+
+        # GET candidate messages and labels
+        candidate_messages = [self.messages[i] for i in bm25_indices]
+        candidate_labels = [self.labels[i] for i in bm25_indices]
+
+        # embedding for bm25_top-k candidates
+        candidate_embeddings = self.vector_store.embeddings[bm25_indices]
+        faiss.normalize_L2(candidate_embeddings)
+
+        # similarity with query
+        query_embedding = self.vector_store.embedder.encode(query_text, is_query=True).astype("float32")
+        faiss.normalize_L2(query_embedding)
+
+        similarities = candidate_embeddings @ query_embedding.T
+        similarities = similarities.flatten()
+
+        # Top-KNN candidates in top-k BM25 candidates
+        knn_indices_in_candidate = np.argsort(similarities)[::-1][:k]
+        
+        top_similarities = similarities[knn_indices_in_candidate]
+        final_labels = [candidate_labels[i] for i in knn_indices_in_candidate]
+    
+        prediction = Counter(final_labels).most_common(1)[0][0]
 
         neighbors = [
             {
-                "message": self.vector_store.train_metadata.iloc[i]['Message'],
+                "message": candidate_messages[idx],
                 "label": lbl,
-                "score": float(sim)
+                "similarity": float(sim)
             }
-            for i, lbl, sim in zip(indices[0], labels, scores)
+            for idx, lbl, sim in zip(knn_indices_in_candidate, final_labels, top_similarities)
         ]
 
         return {
-            "prediction": final_label,
+            "prediction": prediction,
             "neighbors": neighbors
         }
-

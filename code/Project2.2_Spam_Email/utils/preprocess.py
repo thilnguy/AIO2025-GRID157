@@ -41,6 +41,10 @@ def remove_rare_words(tokens, min_freq=2):
     freq_dist = nltk.FreqDist(tokens)
     return [token for token in tokens if freq_dist[token] >= min_freq]
 
+def remove_multiple_spaces(text):
+    """Remove multiple spaces from text."""
+    return re.sub(r'\s+', ' ', text).strip()
+
 def negation_handling(tokens):
     """Handle negation in text."""
     negation_words = {'not', 'no', 'never', 'nothing', 'nowhere', 'neither', 'nobody', 'nowhere',
@@ -65,12 +69,19 @@ def negation_handling(tokens):
 
 def preprocess_text(text):
     """Preprocess text by apply all steps."""
-    text = lowercase_text(text)
-    text = unidecode_text(text)
-    text = remove_special_characters(text)
-    tokens = tokenize_text(text)
-    tokens = remove_stopwords(tokens, stopwords)
-    tokens = lemmatize_text(tokens)
-#    tokens = remove_rare_words(tokens)
-#    tokens = negation_handling(tokens)
+    if isinstance(text, str):
+        text = text.strip()
+        text = lowercase_text(text)
+        text = unidecode_text(text)
+        text = remove_special_characters(text)
+        text = remove_multiple_spaces(text)
+        tokens = tokenize_text(text)
+        tokens = remove_stopwords(tokens, stopwords)
+        tokens = lemmatize_text(tokens)
+    #    tokens = remove_rare_words(tokens)
+    #    tokens = negation_handling(tokens)
+    elif isinstance(text, list):
+        tokens = [preprocess_text(t) for t in text]
+    else:
+        raise ValueError("Input must be a string or a list of strings.")
     return ' '.join(tokens)
