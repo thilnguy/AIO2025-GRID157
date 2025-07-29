@@ -7,6 +7,7 @@ class Config:
     MISPREDS_PATH = "errors/mispredictions.json"
     LOG_FILE = "logs/app.log"
     CM_DIR = "assets/confusion_matrix"
+    EMBEDDINGS_DIR = "assets/embeddings.npy"
 
     MODEL_NAME = "intfloat/multilingual-e5-base"
     QUERY_PREFIX = "query: "

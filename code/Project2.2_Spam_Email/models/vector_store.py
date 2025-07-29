@@ -61,6 +61,8 @@ class VectorStore:
             logger.info(f"Processed {processed}/{total} rows.")
         
         self.embeddings = np.vstack(all_embeddings)
+        np.save(Config.EMBEDDINGS_DIR, self.embeddings)
+
         faiss.normalize_L2(self.embeddings)
         self.index.add(self.embeddings)
 
@@ -87,6 +89,7 @@ class VectorStore:
             logger.info("FAISS index is on CPU.")
         
         self.train_metadata = pd.read_pickle(Config.TRAIN_METADATA_PATH)
+        self.embeddings = np.load(Config.EMBEDDINGS_DIR)
         
         return self
     

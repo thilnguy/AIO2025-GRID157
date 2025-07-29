@@ -2,7 +2,7 @@ import pandas as pd
 from config import Config
 from utils.logger import setup_logger
 import json
-import os 
+import os
 import faiss
 from utils.preprocess import preprocess_text
 from collections import Counter
@@ -11,6 +11,7 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, confusion_matrix
 from models.knn_classifier import HybridKNNClassifier
+import time
 
 logger = setup_logger("evaluator")
 
@@ -24,6 +25,7 @@ class ModelEvaluator:
                                             labels=vector_store.train_metadata["Category"].tolist())
         self.results = {}
 
+
     def evaluate_embedding_only(self, k=Config.DEFAULT_K):
         """
         Evaluate the embedding model on the test dataset.
@@ -35,10 +37,14 @@ class ModelEvaluator:
         logger.info(f"evaluating model with k ={self.k}")
         embedder = self.vector_store.embedder
 
+        total_time = 0.0
+
         y_true = self.test_df['Category'].map(Config.LABEL2ID).values
         y_preds = []
 
         for message in self.test_df['Message']:
+            start_time = time.time()
+            
             message = preprocess_text(message)
             query_embedding = embedder.encode(message, is_query=True).astype("float32")
             faiss.normalize_L2(query_embedding)
@@ -50,10 +56,13 @@ class ModelEvaluator:
             # majority voting
             pred_label = Counter(neighbor_labels).most_common(1)[0][0]
             pred_label = Config.LABEL2ID[pred_label]
-            
-            y_preds.append(pred_label)
 
-        metrics = self._compute_metrics(y_true, y_preds, "Embedding")
+            y_preds.append(pred_label)
+            total_time += time.time() - start_time
+        
+        avg_time = total_time / len(self.test_df)
+
+        metrics = self._compute_metrics(y_true, y_preds, "Embedding", avg_time)
         self.results['embedding'] = metrics
         return metrics
 
@@ -66,16 +75,21 @@ class ModelEvaluator:
         """
         y_true = self.test_df['Category'].map(Config.LABEL2ID).values
         y_preds = []
+        total_time = 0.0
 
         for message in self.test_df['Message']:
+            start_time = time.time()
             retrieved_labels = self.bm25_retriever.retrieve_with_labels(message, BM25_TOP_K=Config.DEFAULT_K)
 
             #majority voting
             pred_label = Counter(retrieved_labels).most_common(1)[0][0]
             pred_id = Config.LABEL2ID[pred_label]
             y_preds.append(pred_id)
+
+            total_time +=time.time() - start_time
         
-        metrics = self._compute_metrics(y_true, y_preds, "BM25")
+        avg_time = total_time / len(self.test_df)
+        metrics = self._compute_metrics(y_true, y_preds, "BM25", avg_time)
         self.results['bm25'] = metrics
         return metrics
 
@@ -90,14 +104,19 @@ class ModelEvaluator:
         y_true = self.test_df['Category'].map(Config.LABEL2ID).values
         y_preds = []
         self.mispredictions = []
+        total_time = 0.0
 
         for idx, row in self.test_df.iterrows():
+            start_time = time.time()
             message = row['Message']
             true_label = row['Category']  # 'spam' or 'ham'
-
+        
             result = self.hybrid_knn.predict(message)
             pred_label = result['prediction']
             pred_id = Config.LABEL2ID[pred_label]
+            
+          
+            total_time += time.time() - start_time
 
             y_preds.append(pred_id)
 
@@ -111,7 +130,8 @@ class ModelEvaluator:
                 })
 
         # metrics
-        metrics = self._compute_metrics(y_true, y_preds, "Hybrid")
+        avg_time = total_time / len(self.test_df)
+        metrics = self._compute_metrics(y_true, y_preds, "Hybrid", avg_time)
         self.results['hybrid'] = metrics
 
         # Save mispredictions
@@ -119,7 +139,7 @@ class ModelEvaluator:
 
         return metrics
     
-    def _compute_metrics(self, y_true, y_preds, model_name):
+    def _compute_metrics(self, y_true, y_preds, model_name, avg_inference_time):
         """
         Compute evaluation metrics.
         
@@ -143,7 +163,8 @@ class ModelEvaluator:
             'accuracy': accuracy,
             'precision': precision,
             'recall': recall,
-            'f1_score': f1
+            'f1_score': f1,
+            'avg_inference_time': float(avg_inference_time)
         }
         
         logger.info(f"Metrics for {model_name}: {metrics}")
@@ -183,7 +204,7 @@ class ModelEvaluator:
             json.dump(self.mispredictions, f, ensure_ascii=False, indent=2)
         
         logger.info(f"Save {len(self.mispredictions)} misprediction in {mispred_path}")
-        
+
 
     def save_results(self):
         """
@@ -200,7 +221,7 @@ class ModelEvaluator:
         }
         os.makedirs(os.path.dirname(Config.EVALUATION_METADATA_PATH), exist_ok=True)
         with open(Config.EVALUATION_METADATA_PATH, 'w') as f:
-            json.dump(self.results, f, indent=2)
+            json.dump(results, f, indent=2)
         logger.info(f"Evaluation results saved to {Config.EVALUATION_METADATA_PATH}")
 
     def print_summary(self):
@@ -212,4 +233,6 @@ class ModelEvaluator:
             logger.info(f"{model.upper()} - Accuracy: {metrics['accuracy']:.4f}, "
                         f"Precision: {metrics['precision']:.4f}, "
                         f"Recall: {metrics['recall']:.4f}, "
-                        f"F1-Score: {metrics['f1_score']:.4f}")
+                        f"F1-Score: {metrics['f1_score']:.4f}"
+                        f"Time: {metrics['avg_inference_time']:.4f}s") 
+        

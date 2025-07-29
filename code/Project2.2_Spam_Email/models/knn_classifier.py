@@ -37,7 +37,7 @@ class HybridKNNClassifier:
         # Retrieve bm25-top-k documents using BM25
         bm25_indices = self.bm25.retrieve(query_text)
         logger.info(f"BM25 retrieved {len(bm25_indices)} candidates.")
-
+       
         # GET candidate messages and labels
         candidate_messages = [self.messages[i] for i in bm25_indices]
         candidate_labels = [self.labels[i] for i in bm25_indices]
