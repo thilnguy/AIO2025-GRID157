@@ -1,0 +1,22 @@
+name: Prevent Direct Push to Master
+
+on:
+  push:
+    branches:
+      - master  # Triggered on direct push to master
+  pull_request:
+    branches:
+      - master  # Triggered on PR merge into master
+
+jobs:
+  block-direct-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if push is direct
+        run: |
+          # If this is a direct push (not a PR merge), fail the build
+          if [ "$GITHUB_EVENT_NAME" == "push" ] && [ "$GITHUB_REF" == "refs/heads/master" ]; then
+            echo "Direct pushes to master are not allowed. Please create a pull request instead."
+            exit 1  # Fail the workflow to block the push
+          fi
+          echo "PR merge to master is allowed."
