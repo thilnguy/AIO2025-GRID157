@@ -11,7 +11,7 @@ def load_hybrid_classifier():
         vs = VectorStore().load()
         return HybridKNNClassifier(vs)
     except Exception as e:
-        st.error(f"❌ Không thể tải model: {e}")
+        st.error(f"❌ Can't load model: {e}")
         st.info("Run `python build_vector_store.py`.")
         return None
 
