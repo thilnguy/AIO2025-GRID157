@@ -34,7 +34,7 @@ class ModelEvaluator:
             dict: Evaluation metrics including accuracy, precision, recall, and F1-score.
         """
         # Load test data
-        logger.info(f"evaluating model with k ={self.k}")
+        logger.info(f"evaluating model with k = %d",self.k)
         embedder = self.vector_store.embedder
 
         total_time = 0.0
@@ -167,7 +167,7 @@ class ModelEvaluator:
             'avg_inference_time': float(avg_inference_time)
         }
         
-        logger.info(f"Metrics for {model_name}: {metrics}")
+        logger.info(f"Metrics for %s: %s", model_name, metrics)
         return metrics
     
     def _plot_confusion_matrix(self, cm, model_name):
@@ -203,7 +203,7 @@ class ModelEvaluator:
         with open(mispred_path, 'w', encoding='utf-8') as f:
             json.dump(self.mispredictions, f, ensure_ascii=False, indent=2)
         
-        logger.info(f"Save {len(self.mispredictions)} misprediction in {mispred_path}")
+        logger.info(f"Save %d misprediction in %s", len(self.mispredictions), mispred_path)
 
 
     def save_results(self):
@@ -222,7 +222,7 @@ class ModelEvaluator:
         os.makedirs(os.path.dirname(Config.EVALUATION_METADATA_PATH), exist_ok=True)
         with open(Config.EVALUATION_METADATA_PATH, 'w') as f:
             json.dump(results, f, indent=2)
-        logger.info(f"Evaluation results saved to {Config.EVALUATION_METADATA_PATH}")
+        logger.info(f"Evaluation results saved to %s", Config.EVALUATION_METADATA_PATH)
 
     def print_summary(self):
         """
@@ -230,9 +230,10 @@ class ModelEvaluator:
         """
         logger.info("Evaluation Summary:")
         for model, metrics in self.results.items():
-            logger.info(f"{model.upper()} - Accuracy: {metrics['accuracy']:.4f}, "
-                        f"Precision: {metrics['precision']:.4f}, "
-                        f"Recall: {metrics['recall']:.4f}, "
-                        f"F1-Score: {metrics['f1_score']:.4f}"
-                        f"Time: {metrics['avg_inference_time']:.4f}s") 
-        
+            logger.info("%s - Accuracy: %.4f, Precision: %.4f, Recall: %.4f, F1-Score: %.4f, Time: %.4f s",
+                        model.upper(),
+                        metrics['accuracy'],
+                        metrics['precision'],
+                        metrics['recall'],
+                        metrics['f1_score'],
+                        metrics['avg_inference_time'])

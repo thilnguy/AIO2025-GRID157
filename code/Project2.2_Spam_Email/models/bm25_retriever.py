@@ -35,5 +35,14 @@ class BM25Retriever:
         return ranked_indices
     
     def retrieve_with_labels(self, query, BM25_TOP_K=None):
+        """
+        Retrieve label of top-k document in bm25
+        Args:
+            query (str): The query string.
+            top_k (int): Number of top documents to return.
+        Returns:
+            list: List document label.
+        """
         indices = self.retrieve(query, BM25_TOP_K)
         return [self.labels[i] for i in indices]
+        

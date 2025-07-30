@@ -12,7 +12,7 @@ def load_hybrid_classifier():
         return HybridKNNClassifier(vs)
     except Exception as e:
         st.error(f"❌ Không thể tải model: {e}")
-        st.info("Hãy chạy `python build_vector_store.py` trước.")
+        st.info("Run `python build_vector_store.py`.")
         return None
 
 st.set_page_config(
@@ -20,8 +20,12 @@ st.set_page_config(
     layout="centered"
 )
 
+
+if "my_text" not in st.session_state:
+    st.session_state.my_text = ""
+
 def clear_text():
-    st.session_state.email_text = ""
+    st.session_state.my_text = ""
     st.rerun()
 
 st.title("📬 Email: Spam or Ham?")
@@ -42,28 +46,30 @@ with st.sidebar:
         options=["Hybrid (BM25 + Embedding)", "Naive Bayes Classifier"]
     )
     
-    # Chọn K (chỉ áp dụng cho Hybrid)
+    # Chose K neighbor
     if model_choice == "Hybrid (BM25 + Embedding)":
         k = st.slider("Number Neighbor K for KNN_model", min_value=1, max_value=10, value=Config.DEFAULT_K)
     else:
         k = 5
 
-# === NHẬP EMAIL ===
+# === EMAIL ===
 email_text = st.text_area(
     "email:",
     height=150,
-    placeholder="Hello"
+    placeholder="Hello",
+    key="my_text",
+    value=st.session_state.my_text
 )
 
-# === NÚT PHÂN LOẠI ===
+# === Button ===
 if classify_clicked:
     if not email_text.strip():
         st.warning("⚠️ Type email!")
     else:
         if model_choice == "Naive Bayes Classifier":
             # thêm code vào đây
-            st.info("🧪 Đây là mô hình mẫu (Naive Bayes)")
-            st.success("**Kết quả: SPAM**")
+            st.info("🧪 Naive Bayes Classification")
+            st.success("**Result: SPAM**")
             st.markdown("""
             **Lý do (mẫu):**  
             - Từ khóa:  

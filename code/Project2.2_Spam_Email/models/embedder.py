@@ -18,6 +18,17 @@ class E5Embedder:
 
     
     def average_pooling(self, last_hidden_state, attention_mask):
+        """
+        Perform average pooling on transformer last hidden states using attention mask.
+        
+        Args:
+            last_hidden_state (torch.Tensor): Hidden states of shape (batch_size, seq_len, hidden_size).
+            attention_mask (torch.Tensor): Attention mask of shape (batch_size, seq_len).
+
+        Returns:
+            torch.Tensor: Pooled output of shape (batch_size, hidden_size).
+        """
+         
         masked_hidden = last_hidden_state.masked_fill(~attention_mask.unsqueeze(-1).bool(), 0)
         return masked_hidden.sum(dim=1) / attention_mask.sum(dim=1, keepdim=True)
 

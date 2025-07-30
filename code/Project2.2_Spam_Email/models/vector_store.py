@@ -32,7 +32,7 @@ class VectorStore:
             logger.info("Using CPU for FAISS index.")
     
 
-    def build_from_csv(self, data_path=Config.Data_Path):
+    def build_from_csv(self, data_path=Config.DATA_PATH):
         """Build the vector store from a CSV file."""
         df = pd.read_csv(data_path)
         df['cleaned_text'] = df['Message'].apply(preprocess_text)
@@ -43,8 +43,6 @@ class VectorStore:
                             random_state=Config.RANDOM_STATE,
                             stratify=df['Category'])
         
-
-        #train_df[["Category","Message"]].to_csv(Config.TRAIN_METADATA_PATH, index=False)
         test_df[["Category","Message"]].to_csv(Config.TEST_METADATA_PATH, index=False)
 
         # batch processing
@@ -58,7 +56,7 @@ class VectorStore:
             all_embeddings.append(embs)
 
             processed += len(batch_df)
-            logger.info(f"Processed {processed}/{total} rows.")
+            logger.info(f"Processed %d/%d rows.", processed,total)
         
         self.embeddings = np.vstack(all_embeddings)
         np.save(Config.EMBEDDINGS_DIR, self.embeddings)
@@ -69,17 +67,17 @@ class VectorStore:
         #save the index and metadata
         self.train_metadata = train_df
         self.train_metadata.to_pickle(Config.TRAIN_METADATA_PATH)
-        logger.info(f"Vector store built with {len(train_df)} vectors.")
+        logger.info(f"Vector store built with %d vectors.", len(train_df))
     
-    def save(self, path=Config.FAISS_Index_Path):
+    def save(self, path=Config.FAISS_INDEX_PATH):
         """Save the FAISS index to a file."""
         faiss.write_index(self.index, path)
-        logger.info(f"FAISS index saved to {path}.")
+        logger.info(f"FAISS index saved to %s.", path)
 
-    def load(self, path=Config.FAISS_Index_Path):
+    def load(self, path=Config.FAISS_INDEX_PATH):
         """Load the FAISS index from a file."""
         self.index = faiss.read_index(path)
-        logger.info(f"FAISS index loaded from {path}.")
+        logger.info(f"FAISS index loaded from %s.", path)
         # USE GPU if available
         if faiss.get_num_gpus() > 0:
             res = faiss.StandardGpuResources()

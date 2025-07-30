@@ -25,6 +25,4 @@ if __name__ == "__main__":
     evaluator.print_summary()
     
     # Save mispredictions
-    #y_preds = evaluator.hybrid_knn.predict(evaluator.test_df['Message'].tolist())
-
-   # evaluator._save_mispredictions()
+    evaluator._save_mispredictions()

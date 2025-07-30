@@ -1,6 +1,6 @@
 class Config:
-    Data_Path = "data/2cls_spam_text_cls.csv"
-    FAISS_Index_Path = "assets/faiss_index.bin"
+    DATA_PATH = "data/2cls_spam_text_cls.csv"
+    FAISS_INDEX_PATH = "assets/faiss_index.bin"
     TRAIN_METADATA_PATH = "assets/train_metadata.pkl"
     TEST_METADATA_PATH = "assets/test_metadata.csv"
     EVALUATION_METADATA_PATH = "assets/evaluation_results.json"
