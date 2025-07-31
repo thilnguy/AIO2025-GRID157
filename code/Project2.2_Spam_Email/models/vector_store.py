@@ -56,7 +56,7 @@ class VectorStore:
             all_embeddings.append(embs)
 
             processed += len(batch_df)
-            logger.info(f"Processed %d/%d rows.", processed,total)
+            logger.info("Processed %d/%d rows.", processed,total)
         
         self.embeddings = np.vstack(all_embeddings)
         np.save(Config.EMBEDDINGS_DIR, self.embeddings)
@@ -67,17 +67,17 @@ class VectorStore:
         #save the index and metadata
         self.train_metadata = train_df
         self.train_metadata.to_pickle(Config.TRAIN_METADATA_PATH)
-        logger.info(f"Vector store built with %d vectors.", len(train_df))
+        logger.info("Vector store built with %d vectors.", len(train_df))
     
     def save(self, path=Config.FAISS_INDEX_PATH):
         """Save the FAISS index to a file."""
         faiss.write_index(self.index, path)
-        logger.info(f"FAISS index saved to %s.", path)
+        logger.info("FAISS index saved to %s.", path)
 
     def load(self, path=Config.FAISS_INDEX_PATH):
         """Load the FAISS index from a file."""
         self.index = faiss.read_index(path)
-        logger.info(f"FAISS index loaded from %s.", path)
+        logger.info("FAISS index loaded from %s.", path)
         # USE GPU if available
         if faiss.get_num_gpus() > 0:
             res = faiss.StandardGpuResources()

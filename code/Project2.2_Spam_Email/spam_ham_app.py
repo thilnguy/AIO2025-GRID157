@@ -26,7 +26,6 @@ if "my_text" not in st.session_state:
 
 def clear_text():
     st.session_state.my_text = ""
-    st.rerun()
 
 st.title("📬 Email: Spam or Ham?")
 

@@ -34,7 +34,7 @@ class ModelEvaluator:
             dict: Evaluation metrics including accuracy, precision, recall, and F1-score.
         """
         # Load test data
-        logger.info(f"evaluating model with k = %d",self.k)
+        logger.info("evaluating model with k = %d",self.k)
         embedder = self.vector_store.embedder
 
         total_time = 0.0
@@ -167,7 +167,7 @@ class ModelEvaluator:
             'avg_inference_time': float(avg_inference_time)
         }
         
-        logger.info(f"Metrics for %s: %s", model_name, metrics)
+        logger.info("Metrics for %s: %s", model_name, metrics)
         return metrics
     
     def _plot_confusion_matrix(self, cm, model_name):
@@ -203,7 +203,7 @@ class ModelEvaluator:
         with open(mispred_path, 'w', encoding='utf-8') as f:
             json.dump(self.mispredictions, f, ensure_ascii=False, indent=2)
         
-        logger.info(f"Save %d misprediction in %s", len(self.mispredictions), mispred_path)
+        logger.info("Save %d misprediction in %s", len(self.mispredictions), mispred_path)
 
 
     def save_results(self):
@@ -222,7 +222,7 @@ class ModelEvaluator:
         os.makedirs(os.path.dirname(Config.EVALUATION_METADATA_PATH), exist_ok=True)
         with open(Config.EVALUATION_METADATA_PATH, 'w') as f:
             json.dump(results, f, indent=2)
-        logger.info(f"Evaluation results saved to %s", Config.EVALUATION_METADATA_PATH)
+        logger.info("Evaluation results saved to %s", Config.EVALUATION_METADATA_PATH)
 
     def print_summary(self):
         """
