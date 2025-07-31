@@ -29,7 +29,7 @@ class ModelEvaluator:
     def evaluate_embedding_only(self, k=Config.DEFAULT_K):
         """
         Evaluate the embedding model on the test dataset.
-        
+
         Returns:
             dict: Evaluation metrics including accuracy, precision, recall, and F1-score.
         """
@@ -44,7 +44,7 @@ class ModelEvaluator:
 
         for message in self.test_df['Message']:
             start_time = time.time()
-            
+
             message = preprocess_text(message)
             query_embedding = embedder.encode(message, is_query=True).astype("float32")
             faiss.normalize_L2(query_embedding)
@@ -58,8 +58,9 @@ class ModelEvaluator:
             pred_label = Config.LABEL2ID[pred_label]
 
             y_preds.append(pred_label)
+
             total_time += time.time() - start_time
-        
+
         avg_time = total_time / len(self.test_df)
 
         metrics = self._compute_metrics(y_true, y_preds, "Embedding", avg_time)
@@ -69,7 +70,7 @@ class ModelEvaluator:
     def evaluate_bm25_only(self):
         """
         Evaluate the BM25 retriever on the test dataset.
-        
+
         Returns:
             dict: Evaluation metrics including accuracy, precision, recall, and F1-score.
         """
@@ -77,17 +78,17 @@ class ModelEvaluator:
         y_preds = []
         total_time = 0.0
 
-        for message in self.test_df['Message']:
+        for idx, row in self.test_df.iterrows():
             start_time = time.time()
+            message = row['Message']
             retrieved_labels = self.bm25_retriever.retrieve_with_labels(message, BM25_TOP_K=Config.DEFAULT_K)
 
             #majority voting
             pred_label = Counter(retrieved_labels).most_common(1)[0][0]
             pred_id = Config.LABEL2ID[pred_label]
             y_preds.append(pred_id)
+            total_time += time.time() - start_time
 
-            total_time +=time.time() - start_time
-        
         avg_time = total_time / len(self.test_df)
         metrics = self._compute_metrics(y_true, y_preds, "BM25", avg_time)
         self.results['bm25'] = metrics
@@ -97,7 +98,7 @@ class ModelEvaluator:
         """
         Evaluate the hybrid model (BM25 + Embedding) on the test dataset.
         Also saves mispredictions with neighbor context for analysis.
-        
+
         Returns:
             dict: Evaluation metrics including accuracy, precision, recall, and F1-score.
         """
@@ -110,12 +111,12 @@ class ModelEvaluator:
             start_time = time.time()
             message = row['Message']
             true_label = row['Category']  # 'spam' or 'ham'
-        
+
             result = self.hybrid_knn.predict(message)
             pred_label = result['prediction']
             pred_id = Config.LABEL2ID[pred_label]
-            
-          
+
+
             total_time += time.time() - start_time
 
             y_preds.append(pred_id)
@@ -138,16 +139,16 @@ class ModelEvaluator:
         self._save_mispredictions()
 
         return metrics
-    
-    def _compute_metrics(self, y_true, y_preds, model_name, avg_inference_time):
+
+    def _compute_metrics(self, y_true, y_preds, model_name):
         """
         Compute evaluation metrics.
-        
+
         Args:
             y_true (np.ndarray): True labels.
             y_preds (list): Predicted labels.
             model_name (str): Name of the model being evaluated.
-        
+
         Returns:
             dict: Evaluation metrics including accuracy, precision, recall, and F1-score.
         """
@@ -166,14 +167,14 @@ class ModelEvaluator:
             'f1_score': f1,
             'avg_inference_time': float(avg_inference_time)
         }
-        
-        logger.info("Metrics for %s: %s", model_name, metrics)
+
+        logger.info(f"Metrics for {model_name}: {metrics}")
         return metrics
-    
+
     def _plot_confusion_matrix(self, cm, model_name):
         """
         Plot and save the confusion matrix.
-        
+
         Args:
             cm (np.ndarray): Confusion matrix.
             model_name (str): Name of the model.s
@@ -195,15 +196,15 @@ class ModelEvaluator:
         Save mispredictions to a JSON file.
         """
         mispred_path = Config.MISPREDS_PATH
-        
+
         # Ensure the directory exists
         os.makedirs(os.path.dirname(mispred_path), exist_ok=True)
-        
+
         # Lưu file JSON
         with open(mispred_path, 'w', encoding='utf-8') as f:
             json.dump(self.mispredictions, f, ensure_ascii=False, indent=2)
-        
-        logger.info("Save %d misprediction in %s", len(self.mispredictions), mispred_path)
+
+        logger.info(f"Save {len(self.mispredictions)} misprediction in {mispred_path}")
 
 
     def save_results(self):
