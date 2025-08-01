@@ -11,6 +11,7 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, confusion_matrix
 from models.knn_classifier import HybridKNNClassifier
+from models.naive_bayes import MultinomialNaiveBayes, GaussianNaiveBayes
 import time
 
 logger = setup_logger("evaluator")
@@ -23,6 +24,8 @@ class ModelEvaluator:
         self.hybrid_knn = HybridKNNClassifier(vector_store)
         self.bm25_retriever = BM25Retriever(messages=vector_store.train_metadata["Message"].tolist(),
                                             labels=vector_store.train_metadata["Category"].tolist())
+        self.multinomial_nb = MultinomialNaiveBayes(vector_store)
+        self.gaussian_nb = GaussianNaiveBayes(vector_store)
         self.results = {}
 
 
@@ -140,7 +143,51 @@ class ModelEvaluator:
 
         return metrics
 
-    def _compute_metrics(self, y_true, y_preds, model_name):
+    def evaluate_multinomial_naive_bayes(self):
+        """Evaluate the Multinomial Naive Bayes classifier."""
+        return self._evaluate_nb_classifier(self.multinomial_nb, "Multinomial_NB", "multinomial_nb")
+
+    def evaluate_gaussian_naive_bayes(self):
+        """Evaluate the Gaussian Naive Bayes classifier."""
+        return self._evaluate_nb_classifier(self.gaussian_nb, "Gaussian_NB", "gaussian_nb")
+
+    def _evaluate_nb_classifier(self, classifier, model_name, result_key):
+        """Helper method to evaluate a Naive Bayes classifier."""
+        y_true = self.test_df['Category'].map(Config.LABEL2ID).values
+        y_preds = []
+        mispredictions = []
+        total_time = 0.0
+
+        for idx, row in self.test_df.iterrows():
+            message = row['Message']
+            true_label = row['Category']
+
+            result = classifier.predict(message, return_probabilities=True)
+            pred_label = result['prediction']
+            pred_id = Config.LABEL2ID[pred_label]
+
+            total_time += result['inference_time']
+            y_preds.append(pred_id)
+
+            if true_label != pred_label:
+                mispredictions.append({
+                    "message": message,
+                    "true_label": true_label,
+                    "predicted_label": pred_label,
+                    "confidence": result['confidence'],
+                    "probabilities": result.get('probabilities', {}),
+                    "informative_features": result["neighbors"],
+                    "index_in_test": int(idx)
+                })
+
+        avg_time = total_time / len(self.test_df)
+        metrics = self._compute_metrics(y_true, y_preds, model_name, avg_time)
+        self.results[result_key] = metrics
+        setattr(self, f'{result_key}_mispredictions', mispredictions)
+        logger.info(f"{model_name} evaluation completed. {len(mispredictions)} mispredictions out of {len(self.test_df)} samples.")
+        return metrics
+
+    def _compute_metrics(self, y_true, y_preds, model_name, avg_inference_time):
         """
         Compute evaluation metrics.
 

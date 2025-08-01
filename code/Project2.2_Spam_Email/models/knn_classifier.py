@@ -14,18 +14,18 @@ class HybridKNNClassifier:
         self.vector_store = vector_store
         self.messages = vector_store.train_metadata["Message"].tolist()
         self.labels = vector_store.train_metadata["Category"].tolist()
-        
+
         # Build BM25 retriever for training metadata
         self.bm25 = BM25Retriever(self.messages, self.labels)
-        
+
 
     def predict(self, query_text:str, k=None) -> dict:
         """
         Predict the label for a given query using KNN.
-        
+
         Args:
             query (str): The input text to classify.
-        
+
         Returns:
             dict {
                 str: Predicted label,
@@ -36,8 +36,7 @@ class HybridKNNClassifier:
 
         # Retrieve bm25-top-k documents using BM25
         bm25_indices = self.bm25.retrieve(query_text)
-        logger.info("BM25 retrieved %d candidates.", len(bm25_indices))
-       
+
         # GET candidate messages and labels
         candidate_messages = [self.messages[i] for i in bm25_indices]
         candidate_labels = [self.labels[i] for i in bm25_indices]
@@ -55,10 +54,10 @@ class HybridKNNClassifier:
 
         # Top-KNN candidates in top-k BM25 candidates
         knn_indices_in_candidate = np.argsort(similarities)[::-1][:k]
-        
+
         top_similarities = similarities[knn_indices_in_candidate]
         final_labels = [candidate_labels[i] for i in knn_indices_in_candidate]
-    
+
         prediction = Counter(final_labels).most_common(1)[0][0]
 
         neighbors = [
