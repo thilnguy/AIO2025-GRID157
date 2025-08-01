@@ -1,4 +1,4 @@
-import faiss 
+import faiss
 import pandas as pd
 import numpy as np
 from models.embedder import E5Embedder
@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 
 logger = setup_logger("vector_store")
 
-def batch_geneator(df, batch_size=Config.BATCH_SIZE):
+def batch_generator(df, batch_size=Config.BATCH_SIZE):
     """Generator to yield batches of data."""
     for i in range(0, len(df), batch_size):
         yield df.iloc[i:i + batch_size]
@@ -30,19 +30,18 @@ class VectorStore:
             self.index = faiss.index_cpu_to_all_gpus(res, 0, self.index)
         else:
             logger.info("Using CPU for FAISS index.")
-    
+
 
     def build_from_csv(self, data_path=Config.DATA_PATH):
         """Build the vector store from a CSV file."""
         df = pd.read_csv(data_path)
         df['cleaned_text'] = df['Message'].apply(preprocess_text)
-        
         #split the data into train and test
-        train_df, test_df = train_test_split(df, 
-                            test_size=Config.TEST_SIZE, 
+        train_df, test_df = train_test_split(df,
+                            test_size=Config.TEST_SIZE,
                             random_state=Config.RANDOM_STATE,
                             stratify=df['Category'])
-        
+
         test_df[["Category","Message"]].to_csv(Config.TEST_METADATA_PATH, index=False)
 
         # batch processing
@@ -50,14 +49,18 @@ class VectorStore:
         processed = 0
         all_embeddings = []
 
-        for batch_df in batch_geneator(train_df, self.batch_size):
+        for batch_df in batch_generator(train_df, self.batch_size):
             texts = batch_df['cleaned_text'].tolist()
-            embs = self.embedder.encode(texts, is_query=False)
+            try:
+                embs = self.embedder.encode(texts, is_query=False)
+            except Exception as e:
+                logger.error("Error encoding batch: %s", e)
+                continue
             all_embeddings.append(embs)
 
             processed += len(batch_df)
             logger.info("Processed %d/%d rows.", processed,total)
-        
+
         self.embeddings = np.vstack(all_embeddings)
         np.save(Config.EMBEDDINGS_DIR, self.embeddings)
 
@@ -68,7 +71,7 @@ class VectorStore:
         self.train_metadata = train_df
         self.train_metadata.to_pickle(Config.TRAIN_METADATA_PATH)
         logger.info("Vector store built with %d vectors.", len(train_df))
-    
+
     def save(self, path=Config.FAISS_INDEX_PATH):
         """Save the FAISS index to a file."""
         faiss.write_index(self.index, path)
@@ -85,9 +88,8 @@ class VectorStore:
             logger.info("FAISS index moved to GPU.")
         else:
             logger.info("FAISS index is on CPU.")
-        
+
         self.train_metadata = pd.read_pickle(Config.TRAIN_METADATA_PATH)
         self.embeddings = np.load(Config.EMBEDDINGS_DIR)
-        
+
         return self
-    
