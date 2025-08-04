@@ -14,7 +14,7 @@ class E5Embedder:
         # check GPU availability
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model.to(self.device)
-        logger.info(f"Using device: {self.device}")
+        logger.info("Using device: %s",self.device)
 
     
     def average_pooling(self, last_hidden_state, attention_mask):
