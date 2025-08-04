@@ -1,0 +1,7 @@
+numpy           # Core numerical computations
+pandas          # Data manipulation & analysis
+scikit-learn    # Classical ML algorithms & utilities
+matplotlib      # Basic plotting and visualization
+seaborn         # Statistical data visualization
+torch           # PyTorch framework for deep learning (or tensorflow)
+tqdm            # Progress bars
