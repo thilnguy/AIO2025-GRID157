@@ -41,12 +41,3 @@ Pandas được ứng dụng rộng rãi trong nhiều lĩnh vực khác nhau:
 * **Trực quan hóa dữ liệu**: Kết hợp với các thư viện khác như Matplotlib và Seaborn để tạo biểu đồ và hình ảnh trực quan cho dữ liệu.
 
 * **Tự động hóa công việc văn phòng**: Tự động đọc, cập nhật và viết báo cáo từ các tệp Excel/CSV, hợp lý hóa các tác vụ văn phòng thường ngày.
-1. Pandas introduction
-	1. Data loading & Common data type
-	2. Data retrieval (index, slicing, cleaning...)
-2. Example
-	1. Iris dataset
-3. Extra
-	1. Visualize data with matplotlib/seaborn
-	2. Analyze data
-4. Conclusion
