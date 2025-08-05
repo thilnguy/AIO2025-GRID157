@@ -1,0 +1,530 @@
+[
+  {
+    "message": "There are no other charges after transfer charges and you can withdraw anyhow you like",
+    "true_label": "ham",
+    "predicted_label": "spam",
+    "neighbors": [
+      {
+        "message": "Nothing. I meant that once the money enters your account here, the bank will remove its flat rate. Someone transfered  &lt;#&gt;  to my account and  &lt;#&gt; dollars got removed. So the banks differ and charges also differ.be sure you trust the 9ja person you are sending account details to cos...",
+        "label": "ham",
+        "similarity": 0.8488423824310303
+      },
+      {
+        "message": "SMS SERVICES. for your inclusive text credits, pls goto www.comuk.net login= 3qxj9 unsubscribe with STOP, no extra charge. help 08702840625.COMUK. 220-CM2 9AE",
+        "label": "spam",
+        "similarity": 0.8080542087554932
+      },
+      {
+        "message": "SMS SERVICES. for your inclusive text credits, pls goto www.comuk.net login= ***** unsubscribe with STOP. no extra charge. help:08700469649. PO BOX420. IP4 5WE",
+        "label": "spam",
+        "similarity": 0.8079355955123901
+      },
+      {
+        "message": "SMSSERVICES. for yourinclusive text credits, pls goto www.comuk.net login= 3qxj9 unsubscribe with STOP, no extra charge. help 08702840625.COMUK. 220-CM2 9AE",
+        "label": "spam",
+        "similarity": 0.8072435855865479
+      },
+      {
+        "message": "Text PASS to 69669 to collect your polyphonic ringtones. Normal gprs charges apply only. Enjoy your tones",
+        "label": "spam",
+        "similarity": 0.8045002818107605
+      }
+    ],
+    "index_in_test": 159
+  },
+  {
+    "message": "If you don't, your prize will go to another customer. T&C at www.t-c.biz 18+ 150p/min Polo Ltd Suite 373 London W1J 6HL Please call back if busy",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "If you don't, your prize will go to another customer. T&C at www.t-c.biz 18+ 150p/min Polo Ltd Suite 373 London W1J 6HL Please call back if busy",
+        "label": "spam",
+        "similarity": 0.9052972793579102
+      },
+      {
+        "message": "Customer place i will call you.",
+        "label": "ham",
+        "similarity": 0.8344210386276245
+      },
+      {
+        "message": "Customer place i will call you",
+        "label": "ham",
+        "similarity": 0.8344210386276245
+      },
+      {
+        "message": "Sorry i missed your call. Can you please call back.",
+        "label": "ham",
+        "similarity": 0.8320479393005371
+      },
+      {
+        "message": "Please call our customer service representative on 0800 169 6031 between 10am-9pm as you have WON a guaranteed £1000 cash or £5000 prize!",
+        "label": "spam",
+        "similarity": 0.8229674696922302
+      }
+    ],
+    "index_in_test": 198
+  },
+  {
+    "message": "Sorry I missed your call let's talk when you have the time. I'm on 07090201529",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "Hi. I'm sorry i missed your call. Can you pls call back.",
+        "label": "ham",
+        "similarity": 0.8737572431564331
+      },
+      {
+        "message": "Sorry i missed your call. Can you please call back.",
+        "label": "ham",
+        "similarity": 0.8733370304107666
+      },
+      {
+        "message": "I'm at work. Please call",
+        "label": "ham",
+        "similarity": 0.8596775531768799
+      },
+      {
+        "message": "I'm at work. Please call",
+        "label": "ham",
+        "similarity": 0.8596775531768799
+      },
+      {
+        "message": "I'm at work. Please call",
+        "label": "ham",
+        "similarity": 0.8596775531768799
+      }
+    ],
+    "index_in_test": 219
+  },
+  {
+    "message": "Latest News! Police station toilet stolen, cops have nothing to go on!",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "Good afternoon my boytoy. How goes that walking here and there day ? Did you get that police abstract? Are you still out and about? I wake and miss you babe",
+        "label": "ham",
+        "similarity": 0.8141565322875977
+      },
+      {
+        "message": "Okies... I'll go yan jiu too... We can skip ard oso, go cine den go mrt one, blah blah blah...",
+        "label": "ham",
+        "similarity": 0.8119512796401978
+      },
+      {
+        "message": "No it's waiting in e car dat's bored wat. Cos wait outside got nothing 2 do. At home can do my stuff or watch tv wat.",
+        "label": "ham",
+        "similarity": 0.8104676604270935
+      },
+      {
+        "message": "Nothing spl..wat abt u and whr ru?",
+        "label": "ham",
+        "similarity": 0.8098459243774414
+      },
+      {
+        "message": "sports fans - get the latest sports news str* 2 ur mobile 1 wk FREE PLUS a FREE TONE Txt SPORT ON to 8007 www.getzed.co.uk 0870141701216+ norm 4txt/120p",
+        "label": "spam",
+        "similarity": 0.8084584474563599
+      }
+    ],
+    "index_in_test": 235
+  },
+  {
+    "message": "For sale - arsenal dartboard. Good condition but no doubles or trebles!",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "Da is good good player.why he is unsold.",
+        "label": "ham",
+        "similarity": 0.8228645324707031
+      },
+      {
+        "message": "Doing my masters. When will you buy a bb cos i have for sale and how's bf",
+        "label": "ham",
+        "similarity": 0.8103834986686707
+      },
+      {
+        "message": "Double Mins & Double Txt & 1/2 price Linerental on Latest Orange Bluetooth mobiles. Call MobileUpd8 for the very latest offers. 08000839402 or call2optout/LF56",
+        "label": "spam",
+        "similarity": 0.804214358329773
+      },
+      {
+        "message": "pdate_Now - Double mins and 1000 txts on Orange tariffs. Latest Motorola, SonyEricsson & Nokia & Bluetooth FREE! Call MobileUpd8 on 08000839402 or call2optout/!YHL",
+        "label": "spam",
+        "similarity": 0.799623429775238
+      },
+      {
+        "message": "Good stuff, will do.",
+        "label": "ham",
+        "similarity": 0.7951880693435669
+      }
+    ],
+    "index_in_test": 478
+  },
+  {
+    "message": "Email AlertFrom: Jeri StewartSize: 2KBSubject: Low-cost prescripiton drvgsTo listen to email call 123",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "No calls..messages..missed calls",
+        "label": "ham",
+        "similarity": 0.8178449273109436
+      },
+      {
+        "message": "No calls..messages..missed calls",
+        "label": "ham",
+        "similarity": 0.8178449273109436
+      },
+      {
+        "message": "No calls..messages..missed calls",
+        "label": "ham",
+        "similarity": 0.8178449273109436
+      },
+      {
+        "message": "Freemsg: 1-month unlimited free calls! Activate SmartCall Txt: CALL to No: 68866. Subscriptn3gbp/wk unlimited calls Help: 08448714184 Stop?txt stop landlineonly",
+        "label": "spam",
+        "similarity": 0.8138548135757446
+      },
+      {
+        "message": "Call to the number which is available in appointment. And ask to connect the call to waheed fathima.",
+        "label": "ham",
+        "similarity": 0.8125565052032471
+      }
+    ],
+    "index_in_test": 606
+  },
+  {
+    "message": "When you just put in the + sign, choose my number and the pin will show. Right?",
+    "true_label": "ham",
+    "predicted_label": "spam",
+    "neighbors": [
+      {
+        "message": "Open rebtel with firefox. When it loads just put plus sign in the user name place, and it will show you two numbers. The lower number is my number. Once you pick that number the pin will display okay!",
+        "label": "ham",
+        "similarity": 0.8658013343811035
+      },
+      {
+        "message": "Your credits have been topped up for http://www.bubbletext.com Your renewal Pin is tgxxrz",
+        "label": "spam",
+        "similarity": 0.8291966915130615
+      },
+      {
+        "message": "I forgot 2 ask ü all smth.. There's a card on da present lei... How? Ü all want 2 write smth or sign on it?",
+        "label": "ham",
+        "similarity": 0.8291938304901123
+      },
+      {
+        "message": "Check Out Choose Your Babe Videos @ sms.shsex.netUN fgkslpoPW fgkslpo",
+        "label": "spam",
+        "similarity": 0.8256694674491882
+      },
+      {
+        "message": "Ur TONEXS subscription has been renewed and you have been charged £4.50. You can choose 10 more polys this month. www.clubzed.co.uk *BILLING MSG*",
+        "label": "spam",
+        "similarity": 0.82530277967453
+      }
+    ],
+    "index_in_test": 619
+  },
+  {
+    "message": "1000's of girls many local 2 u who r virgins 2 this & r ready 2 4fil ur every sexual need. Can u 4fil theirs? text CUTE to 69911(£1.50p. m)",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "Hi did u decide wot 2 get 4 his bday if not ill prob jus get him a voucher frm virgin or sumfing",
+        "label": "ham",
+        "similarity": 0.8464836478233337
+      },
+      {
+        "message": "1000's flirting NOW! Txt GIRL or BLOKE & ur NAME & AGE, eg GIRL ZOE 18 to 8007 to join and get chatting!",
+        "label": "spam",
+        "similarity": 0.8431469202041626
+      },
+      {
+        "message": "Thanx 4 2day! U r a goodmate I THINK UR RITE SARY! ASUSUAL!1 U CHEERED ME UP! LOVE U FRANYxxxxx",
+        "label": "ham",
+        "similarity": 0.8337686061859131
+      },
+      {
+        "message": "Squeeeeeze!! This is christmas hug.. If u lik my frndshp den hug me back.. If u get 3 u r cute:) 6 u r luvd:* 9 u r so lucky;) None? People hate u:",
+        "label": "ham",
+        "similarity": 0.8277484178543091
+      },
+      {
+        "message": "Can i meet ü at 5.. As 4 where depends on where ü wan 2 in lor..",
+        "label": "ham",
+        "similarity": 0.8266100883483887
+      }
+    ],
+    "index_in_test": 754
+  },
+  {
+    "message": "We are pleased to inform that your application for Airtel Broadband is processed successfully. Your installation will happen within 3 days.",
+    "true_label": "ham",
+    "predicted_label": "spam",
+    "neighbors": [
+      {
+        "message": "You will recieve your tone within the next 24hrs. For Terms and conditions please see Channel U Teletext Pg 750",
+        "label": "spam",
+        "similarity": 0.8243883848190308
+      },
+      {
+        "message": "3. You have received your mobile content. Enjoy",
+        "label": "spam",
+        "similarity": 0.8231672644615173
+      },
+      {
+        "message": "ASKED 3MOBILE IF 0870 CHATLINES INCLU IN FREE MINS. INDIA CUST SERVs SED YES. L8ER GOT MEGA BILL. 3 DONT GIV A SHIT. BAILIFF DUE IN DAYS. I O £250 3 WANT £800",
+        "label": "spam",
+        "similarity": 0.8202735185623169
+      },
+      {
+        "message": "Have you laid your airtel line to rest?",
+        "label": "ham",
+        "similarity": 0.8186790347099304
+      },
+      {
+        "message": "You got job in wipro:)you will get every thing in life in 2 or 3 years.",
+        "label": "ham",
+        "similarity": 0.818382740020752
+      }
+    ],
+    "index_in_test": 822
+  },
+  {
+    "message": "XCLUSIVE@CLUBSAISAI 2MOROW 28/5 SOIREE SPECIALE ZOUK WITH NICHOLS FROM PARIS.FREE ROSES 2 ALL LADIES !!! info: 07946746291/07880867867",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "Congratulations U can claim 2 VIP row A Tickets 2 C Blu in concert in November or Blu gift guaranteed Call 09061104276 to claim TS&Cs www.smsco.net cost£3.75max",
+        "label": "spam",
+        "similarity": 0.8062683343887329
+      },
+      {
+        "message": "I AM AT A PARTY WITH ALEX NICHOLS",
+        "label": "ham",
+        "similarity": 0.8054642677307129
+      },
+      {
+        "message": "Are you available for soiree on June 3rd?",
+        "label": "ham",
+        "similarity": 0.8032798171043396
+      },
+      {
+        "message": "ZOE IT JUST HIT ME 2 IM FUCKING SHITIN MYSELF IL DEFO TRY MY HARDEST 2 CUM 2MOROW LUV U MILLIONS LEKDOG",
+        "label": "ham",
+        "similarity": 0.8022459745407104
+      },
+      {
+        "message": "HEY BABE! FAR 2 SPUN-OUT 2 SPK AT DA MO... DEAD 2 DA WRLD. BEEN SLEEPING ON DA SOFA ALL DAY, HAD A COOL NYTHO, TX 4 FONIN HON, CALL 2MWEN IM BK FRMCLOUD 9! J X",
+        "label": "ham",
+        "similarity": 0.7978183627128601
+      }
+    ],
+    "index_in_test": 823
+  },
+  {
+    "message": "ROMCAPspam Everyone around should be responding well to your presence since you are so warm and outgoing. You are bringing in a real breath of sunshine.",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "It has everything to do with the weather. Keep extra warm. Its a cold but nothing serious. Pls lots of vitamin c",
+        "label": "ham",
+        "similarity": 0.8278172016143799
+      },
+      {
+        "message": "Awesome, lemme know whenever you're around",
+        "label": "ham",
+        "similarity": 0.8234835863113403
+      },
+      {
+        "message": "Have a great trip to India. And bring the light to everyone not just with the project but with everyone that is lucky to see you smile. Bye. Abiola",
+        "label": "ham",
+        "similarity": 0.822827935218811
+      },
+      {
+        "message": "One of the joys in lifeis waking up each daywith thoughts that somewhereSomeone cares enough tosend a warm morning greeting.. -",
+        "label": "ham",
+        "similarity": 0.820080578327179
+      },
+      {
+        "message": "That's cool he'll be here all night, lemme know when you're around",
+        "label": "ham",
+        "similarity": 0.8171340823173523
+      }
+    ],
+    "index_in_test": 841
+  },
+  {
+    "message": "Do you realize that in about 40 years, we'll have thousands of old ladies running around with tattoos?",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "OH FUCK. JUSWOKE UP IN A BED ON A BOATIN THE DOCKS. SLEPT WID 25 YEAR OLD. SPINOUT! GIV U DA GOSSIP L8R. XXX",
+        "label": "ham",
+        "similarity": 0.810483455657959
+      },
+      {
+        "message": "Where wuld I be without my baby? The thought alone mite break me and I dont wanna go crazy but everyboy needs his lady xxxxxxxx",
+        "label": "ham",
+        "similarity": 0.8085168600082397
+      },
+      {
+        "message": "Hi I'm sue. I am 20 years old and work as a lapdancer. I love sex. Text me live - I'm i my bedroom now. text SUE to 89555. By TextOperator G2 1DA 150ppmsg 18+",
+        "label": "spam",
+        "similarity": 0.8010318279266357
+      },
+      {
+        "message": "I know! Grumpy old people. My mom was like you better not be lying. Then again I am always the one to play jokes...",
+        "label": "ham",
+        "similarity": 0.79640793800354
+      },
+      {
+        "message": "The beauty of life is in next second.. which hides thousands of secrets. I wish every second will be wonderful in ur life...!! gud n8",
+        "label": "ham",
+        "similarity": 0.7934027910232544
+      }
+    ],
+    "index_in_test": 852
+  },
+  {
+    "message": "what is your account number?",
+    "true_label": "ham",
+    "predicted_label": "spam",
+    "neighbors": [
+      {
+        "message": "Your 2004 account for 07XXXXXXXXX shows 786 unredeemed points. To claim call 08719181259 Identifier code: XXXXX Expires 26.03.05",
+        "label": "spam",
+        "similarity": 0.8630979061126709
+      },
+      {
+        "message": "PRIVATE! Your 2004 Account Statement for 078498****7 shows 786 unredeemed Bonus Points. To claim call 08719180219 Identifier Code: 45239 Expires 06.05.05",
+        "label": "spam",
+        "similarity": 0.8575261831283569
+      },
+      {
+        "message": "PRIVATE! Your 2003 Account Statement for 07815296484 shows 800 un-redeemed S.I.M. points. Call 08718738001 Identifier Code 41782 Expires 18/11/04",
+        "label": "spam",
+        "similarity": 0.8563575744628906
+      },
+      {
+        "message": "PRIVATE! Your 2003 Account Statement for shows 800 un-redeemed S. I. M. points. Call 08718738002 Identifier Code: 48922 Expires 21/11/04",
+        "label": "spam",
+        "similarity": 0.8559286594390869
+      },
+      {
+        "message": "PRIVATE! Your 2003 Account Statement for 07808 XXXXXX shows 800 un-redeemed S. I. M. points. Call 08719899217 Identifier Code: 41685 Expires 07/11/04",
+        "label": "spam",
+        "similarity": 0.8551618456840515
+      }
+    ],
+    "index_in_test": 1013
+  },
+  {
+    "message": "RCT' THNQ Adrian for U text. Rgds Vatian",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "You'll not rcv any more msgs from the chat svc. For FREE Hardcore services text GO to: 69988 If u get nothing u must Age Verify with yr network & try again",
+        "label": "spam",
+        "similarity": 0.8177769184112549
+      },
+      {
+        "message": "Hope you enjoyed your new content. text stop to 61610 to unsubscribe. help:08712400602450p Provided by tones2you.co.uk",
+        "label": "spam",
+        "similarity": 0.8096745610237122
+      },
+      {
+        "message": "Awesome, plan to get here any time after like  &lt;#&gt; , I'll text you details in a wee bit",
+        "label": "ham",
+        "similarity": 0.8074535131454468
+      },
+      {
+        "message": "Cool, text me when you head out",
+        "label": "ham",
+        "similarity": 0.8070861101150513
+      },
+      {
+        "message": "I wonder if you'll get this text?",
+        "label": "ham",
+        "similarity": 0.8066114783287048
+      }
+    ],
+    "index_in_test": 1035
+  },
+  {
+    "message": "Hi ya babe x u 4goten bout me?' scammers getting smart..Though this is a regular vodafone no, if you respond you get further prem rate msg/subscription. Other nos used also. Beware!",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "alright babe, justthought id sayhey! how u doin?nearly the endof me wk offdam nevamind!We will have 2Hook up sn if uwant m8? loveJen x.",
+        "label": "ham",
+        "similarity": 0.8347247838973999
+      },
+      {
+        "message": "Hi babe its Chloe, how r u? I was smashed on saturday night, it was great! How was your weekend? U been missing me? SP visionsms.com Text stop to stop 150p/text",
+        "label": "spam",
+        "similarity": 0.8271337747573853
+      },
+      {
+        "message": "Hi did u decide wot 2 get 4 his bday if not ill prob jus get him a voucher frm virgin or sumfing",
+        "label": "ham",
+        "similarity": 0.8256324529647827
+      },
+      {
+        "message": "Hi its me you are probably having too much fun to get this message but i thought id txt u cos im bored! and james has been farting at me all night",
+        "label": "ham",
+        "similarity": 0.8244194984436035
+      },
+      {
+        "message": "If you don't respond imma assume you're still asleep and imma start calling n shit",
+        "label": "ham",
+        "similarity": 0.8230737447738647
+      }
+    ],
+    "index_in_test": 1069
+  },
+  {
+    "message": "#ERROR!",
+    "true_label": "spam",
+    "predicted_label": "ham",
+    "neighbors": [
+      {
+        "message": "Yar but they say got some error.",
+        "label": "ham",
+        "similarity": 0.8514392375946045
+      },
+      {
+        "message": "#ERROR!",
+        "label": "spam",
+        "similarity": 0.8491448163986206
+      },
+      {
+        "message": "#ERROR!",
+        "label": "spam",
+        "similarity": 0.8491448163986206
+      },
+      {
+        "message": "So check your errors and if you had difficulties, do correction.",
+        "label": "ham",
+        "similarity": 0.8473759889602661
+      },
+      {
+        "message": "Wot is u up 2 then bitch?",
+        "label": "ham",
+        "similarity": 0.8098143339157104
+      }
+    ],
+    "index_in_test": 1089
+  }
+]
