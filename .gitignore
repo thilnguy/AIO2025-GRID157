@@ -3,14 +3,6 @@ __pycache__/
 *.py[codz]
 *$py.class
 
-*.json
-*.csv
-*.bin
-*.log
-*.pkl
-*.pickle
-*.npy
-*.png 
 # C extensions
 *.so
 

@@ -1,22 +1,23 @@
-name: Prevent Direct Push to Master
+name: CI Pipeline
 
 on:
   push:
     branches:
-      - master  # Triggered on direct push to master
+      - master
   pull_request:
     branches:
-      - master  # Triggered on PR merge into master
-
+      - master
+      
 jobs:
-  block-direct-push:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if push is direct
-        run: |
-          # If this is a direct push (not a PR merge), fail the build
-          if [ "$GITHUB_EVENT_NAME" == "push" ] && [ "$GITHUB_REF" == "refs/heads/master" ]; then
-            echo "Direct pushes to master are not allowed. Please create a pull request instead."
-            exit 1  # Fail the workflow to block the push
-          fi
-          echo "PR merge to master is allowed."
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install tox
+        run: pip install tox
+      - name: Run tests via tox
+        run: tox

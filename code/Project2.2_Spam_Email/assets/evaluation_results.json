@@ -1,0 +1,34 @@
+{
+  "results": {
+    "embedding": {
+      "model": "Embedding",
+      "accuracy": 0.957847533632287,
+      "precision": 0.9626803555403893,
+      "recall": 0.957847533632287,
+      "f1_score": 0.9592997639696556,
+      "avg_inference_time": 0.055693459617717385
+    },
+    "bm25": {
+      "model": "BM25",
+      "accuracy": 0.97847533632287,
+      "precision": 0.9785974618341912,
+      "recall": 0.97847533632287,
+      "f1_score": 0.9778113376387032,
+      "avg_inference_time": 0.006309338214686099
+    },
+    "hybrid": {
+      "model": "Hybrid",
+      "accuracy": 0.9856502242152466,
+      "precision": 0.9855350782724008,
+      "recall": 0.9856502242152466,
+      "f1_score": 0.9854818834399545,
+      "avg_inference_time": 0.06806508970902105
+    }
+  },
+  "config": {
+    "model_name": "intfloat/multilingual-e5-base",
+    "k": 5,
+    "test_size": 0.2,
+    "random_state": 42
+  }
+}

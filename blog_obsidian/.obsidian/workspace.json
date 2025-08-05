@@ -1,0 +1,176 @@
+{
+  "main": {
+    "id": "1f735cd2a33d7274",
+    "type": "split",
+    "children": [
+      {
+        "id": "53f0eb420070f00e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9f142b24329bf35a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Blog M03W03 Data Visualization & Analysis with Pandas.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Blog M03W03 Data Visualization & Analysis with Pandas"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ef73bab1ac90ef22",
+    "type": "split",
+    "children": [
+      {
+        "id": "3b4fd7c9b579402d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "04c09db8bee52c37",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "9d8dae0988bfff9e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "2fa2518b762d0b3a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "80573f0cba7f9ed0",
+    "type": "split",
+    "children": [
+      {
+        "id": "b2a7501d923d9092",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b8b65a81188d2c4a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Blog M03W03 Data Visualization & Analysis with Pandas.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Blog M03W03 Data Visualization & Analysis with Pandas"
+            }
+          },
+          {
+            "id": "9e2757be965f300f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Blog M03W03 Data Visualization & Analysis with Pandas.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Blog M03W03 Data Visualization & Analysis with Pandas"
+            }
+          },
+          {
+            "id": "0162c58118a4c96d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a06c53a7af7f90a2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Blog M03W03 Data Visualization & Analysis with Pandas.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Blog M03W03 Data Visualization & Analysis with Pandas"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "github-sync:Sync with Remote": false
+    }
+  },
+  "active": "9f142b24329bf35a",
+  "lastOpenFiles": [
+    "Blog M03W03 Data Visualization & Analysis with Pandas.md"
+  ]
+}
